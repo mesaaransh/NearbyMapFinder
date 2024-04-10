@@ -1,15 +1,28 @@
 import data from './Data';
 import './App.css'
 import { useEffect, useState } from 'react';
-import Map from 'react-map-gl/maplibre';
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import "leaflet/dist/leaflet.css";
+import pilotMarker from "./assets/pilot-marker.svg"
+import targetMarker from "./assets/target-marker.svg"
+import { Icon } from 'leaflet';
 
 
 function App() {
 
   var [lat, setLat] = useState(0);
   var [long, setLong] = useState(0);
-
   var [filterData, setFilterData] = useState([])
+
+  const customIcon = new Icon({
+    iconUrl: pilotMarker,
+    iconSize: [25, 25]
+  });
+
+  const targetIcon = new Icon({
+    iconUrl: targetMarker,
+    iconSize: [38, 38]
+  });
 
   function distance(lat1, lat2, lon1, lon2) {
 
@@ -48,40 +61,70 @@ function App() {
 
   return (
     <>
-      <form action="" onSubmit={nearbyFinder}>
-        <input type="text" name="lat" onChange={(e) => { setLat(e.target.value) }} />
-        <input type="text" name="long" onChange={(e) => { setLong(e.target.value) }} />
-        <button type='submit'>Submit</button>
-      </form>
 
-      <table border={2} >
-        <tr>
-          <th>Name</th>
-          <th>Latitude, Longitude</th>
-          <th>Distance</th>
-        </tr>
+      <div className="container">
+        <div className="pannel">
 
-        {
-          filterData.map((p) => (
+          <form action="" onSubmit={nearbyFinder} className='cordinateInputForm'>
+            <div>
+              <input placeholder='Latitude' type="text" name="lat" onChange={(e) => { setLat(e.target.value) }} />
+              <input placeholder='Longitude' type="text" name="long" onChange={(e) => { setLong(e.target.value) }} />
+            </div>
+            <button type='submit'>Submit</button>
+          </form>
+
+          <div className='resultBox'>
+
+            <div className='left'>
+              <h2>Saaransh Gupta</h2>
+              <p>12.123245, 60.123453</p>
+            </div>      
+
+
+            <div className='right'>
+              5.9 Km
+            </div>
+
+          </div>
+
+          <table border={2} className='resultTable'>
             <tr>
-              <td> {p.name} </td>
-              <td> {p.lat}, {p.long} </td>
-              <td> {p.distance}</td>
+              <th>Name</th>
+              <th>Latitude, Longitude</th>
+              <th>Distance</th>
             </tr>
-          ))
-        }
-      </table>
 
-      <Map
-        initialViewState={{
-          longitude: -122.4,
-          latitude: 37.8,
-          zoom: 14
-        }}
-        style={{width: 600, height: 400}}
-        mapStyle="https://api.maptiler.com/maps/streets/style.json?key=AAPK5ce636ef91b4464784de693a6a7da609xda4UJ_NwnKSDKmDF8tGNKxochOSYyoYFsVMOXuCaRR3d0gtY-X8_G3M6Q_iuMgV"
-        />
+            {
+              filterData.map((p) => (
+                <tr>
+                  <td> {p.name} </td>
+                  <td> {p.lat}, {p.long} </td>
+                  <td> {p.distance}</td>
+                </tr>
+              ))
+            }
+          </table>
 
+        </div>
+        <div className="map">
+
+          <MapContainer center={[30.3564242, 76.3647012]} zoom={14} scrollWheelZoom={false}>
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+
+            {filterData.map((marker, index) => (
+              <Marker position={[marker.lat, marker.long]} icon={customIcon}>
+                <Popup>{marker.name}</Popup>
+              </Marker>
+            ))}
+
+            <Marker position={[lat, long]} icon={targetIcon}></Marker>
+          </MapContainer>
+
+        </div>
+      </div>
     </>
   )
 }

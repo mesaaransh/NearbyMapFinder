@@ -1,6 +1,112 @@
-.map{
-  width: 500px;
-  height: 500px;
+*{
+  margin: 0;
+  padding: 0;
+}
 
-  background-color: red;
+body{
+  font-family: sans-serif;
+}
+
+.leaflet-container{
+  height: inherit;
+  width: 100%;
+}
+
+.container{
+  display: flex;
+  background-color: rgb(238, 238, 238);
+  width: 100%;
+  height: 100vh;
+}
+
+.pannel{
+  height: inherit;
+  width: 40%;
+
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.map{
+  height: inherit;
+  width: 60%;
+}
+
+.cordinateInputForm{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cordinateInputForm > button{
+  height: 30px;
+  width: 100%;
+
+  background-color: rgb(155, 155, 155);
+  border: 0px solid;
+  margin-top: 5px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+  font-size: 16px;
+
+  transition-duration: 200ms;
+
+}
+
+.cordinateInputForm > button:hover{
+  filter: brightness(90%);
+}
+
+
+
+.cordinateInputForm > div{
+  width: 100%;
+  display: flex;
+
+  gap: 5px;
+}
+
+.cordinateInputForm > div > input{
+  height: 30px;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.resultTable{
+
+  margin-top: 50px;
+  width: 100%;
+  border-collapse: collapse;
+
+
+}
+
+.resultTable > tr > th{
+  padding: 7px 5px;
+}
+
+.resultTable > tr > td{
+  padding: 7px 5px;
+}
+
+.resultBox{
+
+  display: flex;
+  box-sizing: border-box;
+
+  padding: 20px 20px;
+
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  background-color: rgb(155, 155, 155);
+
+  border-radius: 20px;
+}
+
+.resultBox > .right{
+  font-size: 30px;
 }
