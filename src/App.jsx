@@ -1,18 +1,32 @@
 import data from './Data';
 import './App.css'
-import { useEffect, useState } from 'react';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { useEffect, useRef, useState } from 'react';
+import { MapContainer, Marker, Popup, TileLayer, useMapEvent } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import pilotMarker from "./assets/pilot-marker.svg"
 import targetMarker from "./assets/target-marker.svg"
 import { Icon } from 'leaflet';
 
 
+
+function SetViewOnClick({ animateRef }) {
+  const map = useMapEvent('click', (e) => {
+    map.setView(e.latlng, map.getZoom(), {
+      animate: animateRef.current || false,
+    })
+  })
+
+  return null
+}
+
 function App() {
 
-  var [lat, setLat] = useState(0);
-  var [long, setLong] = useState(0);
+  var [lat, setLat] = useState(30.3564242);
+  var [long, setLong] = useState(76.3647012);
   var [filterData, setFilterData] = useState([])
+  const animateRef = useRef(true)
+
+  const [map, setMap] = useState(null)
 
   const customIcon = new Icon({
     iconUrl: pilotMarker,
@@ -59,6 +73,34 @@ function App() {
     setFilterData(filteredData);
   }
 
+
+  var projects = [
+    {
+      name: "Thapar University",
+      lat: 30.3564242,
+      long: 76.3647012
+    },
+
+    {
+      name: "Patiala Airport",
+      lat: 30.3131204,
+      long: 76.364046,
+    },
+
+    {
+      name: "Qila Mubarak",
+      lat: 30.3299125,
+      long: 76.3808862,
+    },
+
+    {
+      name: "ISBT Bus Terminal",
+      lat: 30.3462235,
+      long: 76.4050482
+    },
+
+  ]
+
   return (
     <>
 
@@ -69,6 +111,17 @@ function App() {
             <h1>Pilot Finder</h1>
           </center>
 
+          <h3>Projects:</h3>
+          {
+            projects.map((p) => (
+
+              <div className="projects" onClick={() => {setLat(p.lat); setLong(p.long); map.setView([p.lat, p.long], 14)}}>
+                <strong>{p.name}</strong> ( {p.lat}, {p.long} )
+              </div>
+
+            ))
+          }
+
           <form action="" onSubmit={nearbyFinder} className='cordinateInputForm'>
             <div>
               <input placeholder='Latitude' type="text" name="lat" onChange={(e) => { setLat(e.target.value) }} />
@@ -77,8 +130,8 @@ function App() {
             <button type='submit'>Submit</button>
           </form>
 
-
-          <div className="results">
+          {filterData.length?
+            <div className="results">
 
             <h3>Best Results: </h3>
             {
@@ -102,6 +155,7 @@ function App() {
             <h3 style={{marginTop: "20px"}}>Other Results: </h3>
             <table border={2} className='resultTable'>
               <tr>
+                <th></th>
                 <th>Name</th>
                 <th>Latitude, Longitude</th>
                 <th>Distance</th>
@@ -111,6 +165,7 @@ function App() {
                 filterData.map((p, i) => (
                   i > 3 ?
                     <tr>
+                      <td> {i} </td>
                       <td> {p.name} </td>
                       <td> {p.lat}, {p.long} </td>
                       <td> {p.distance}</td>
@@ -121,11 +176,15 @@ function App() {
             </table>
 
           </div>
+          :
+          <></>
+          }
+          
 
         </div>
         <div className="map">
 
-          <MapContainer center={[30.3564242, 76.3647012]} zoom={14} scrollWheelZoom={false}>
+          <MapContainer center={[lat, long]} zoom={14} scrollWheelZoom={false} ref={setMap}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -138,6 +197,7 @@ function App() {
             ))}
 
             <Marker position={[lat, long]} icon={targetIcon}></Marker>
+            <SetViewOnClick animateRef={animateRef} />
           </MapContainer>
 
         </div>
