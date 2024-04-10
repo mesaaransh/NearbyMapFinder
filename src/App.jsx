@@ -124,8 +124,8 @@ function App() {
 
           <form action="" onSubmit={nearbyFinder} className='cordinateInputForm'>
             <div>
-              <input placeholder='Latitude' type="text" name="lat" onChange={(e) => { setLat(e.target.value) }} />
-              <input placeholder='Longitude' type="text" name="long" onChange={(e) => { setLong(e.target.value) }} />
+              <input placeholder='Latitude' type="text" value={lat} name="lat" onChange={(e) => { setLat(e.target.value) }} />
+              <input placeholder='Longitude' type="text" value={long} name="long" onChange={(e) => { setLong(e.target.value) }} />
             </div>
             <button type='submit'>Submit</button>
           </form>
@@ -184,7 +184,7 @@ function App() {
         </div>
         <div className="map">
 
-          <MapContainer center={[lat, long]} zoom={14} scrollWheelZoom={false} ref={setMap}>
+          <MapContainer center={[lat, long]} zoom={14} scrollWheelZoom={true} ref={setMap}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
