@@ -23,6 +23,7 @@ function App() {
 
   var [lat, setLat] = useState(30.3564242);
   var [long, setLong] = useState(76.3647012);
+  var [range, setRange] = useState(2);
   var [filterData, setFilterData] = useState([])
   const animateRef = useRef(true)
 
@@ -62,7 +63,7 @@ function App() {
 
     var filteredData = data.filter((p) => {
       var x = distance(lat, p.lat, long, p.long);
-      return (x < 2 ? true : false);
+      return (x < range ? true : false);
     }).map((p) => {
       var newobj = {
         ...p,
@@ -127,6 +128,7 @@ function App() {
               <input placeholder='Latitude' type="text" value={lat} name="lat" onChange={(e) => { setLat(e.target.value) }} />
               <input placeholder='Longitude' type="text" value={long} name="long" onChange={(e) => { setLong(e.target.value) }} />
             </div>
+              <input placeholder='Range' type="text" value={range} name="long" onChange={(e) => { setRange(e.target.value) }} />
             <button type='submit'>Submit</button>
           </form>
 
