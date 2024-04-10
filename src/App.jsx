@@ -190,7 +190,8 @@ function App() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            {filterData.map((marker, index) => (
+            {filterData.map((marker, i) => (
+              
               <Marker position={[marker.lat, marker.long]} icon={customIcon}>
                 <Popup>{marker.name}</Popup>
               </Marker>
