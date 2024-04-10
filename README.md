@@ -17,6 +17,7 @@ Nearby Pilot Finder utilizes users' geolocation and a custom distance calculatio
 
 * React: JavaScript library for building user interfaces.
 * Leaflet: JavaScript library for interactive maps.
+* Vite: For faster development in production
 * (Optional) Additional libraries for specific functionalities like user authentication or pilot data management.
 
 ### Installation
@@ -25,11 +26,10 @@ Nearby Pilot Finder utilizes users' geolocation and a custom distance calculatio
    - Node.js and npm (or yarn) installed on your system.
 2. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/nearby-pilot-finder.git
+   git clone https://github.com/mesaaransh/NearbyMapFinder.git
    ```
 3. **Install Dependencies:**
    ```bash
-   cd nearby-pilot-finder
    npm install  # or yarn install
    ```
 
@@ -37,9 +37,9 @@ Nearby Pilot Finder utilizes users' geolocation and a custom distance calculatio
 
 1. **Start the Development Server:**
    ```bash
-   npm start  # or yarn start
+   npm run dev  # or yarn start
    ```
-   This will typically launch the application at http://localhost:3000/ in your web browser.
+   This will typically launch the application at http://127.0.0.1:5173/ in your web browser.
 
 2. **User Interaction:**
    - Allow users to grant geolocation access (if applicable).
