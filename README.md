@@ -11,14 +11,12 @@ Nearby Pilot Finder utilizes users' geolocation and a custom distance calculatio
 * **Geolocation Integration:** Utilizes user's location to find nearby pilots.
 * **Wide Data Range:** This project has over **500** Data Points (Data.js).
 * **Interactive Map:** Visualizes pilot locations on a map using Leaflet.
-* **Search Functionality (Optional):** Allows users to potentially filter or search for pilots based on additional criteria (to be implemented based on your design).
 
 ### Technologies Used
 
 * React: JavaScript library for building user interfaces.
 * Leaflet: JavaScript library for interactive maps.
 * Vite: For faster development in production
-* (Optional) Additional libraries for specific functionalities like user authentication or pilot data management.
 
 ### Installation
 
@@ -44,18 +42,3 @@ Nearby Pilot Finder utilizes users' geolocation and a custom distance calculatio
 2. **User Interaction:**
    - Allow users to grant geolocation access (if applicable).
    - The map should display the user's location and potentially nearby pilots.
-   - (Optional) Implement search functionality or filters based on your design.
-
-
-### Development
-
-Feel free to modify and extend the codebase to further enhance the functionality of Nearby Pilot Finder.  
-
-### License
-
-(Specify the license under which you distribute your project. Choose an open-source license like MIT or Apache if applicable)
-
-**Note:**
-
-* I replaced the bracketed information with explanations or instructions. Update them with your specific details.
-* I added a line mentioning where the custom distance formula can be found in the codebase. 
