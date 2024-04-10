@@ -9,7 +9,7 @@ Nearby Pilot Finder utilizes users' geolocation and a custom distance calculatio
 ### Features
 
 * **Geolocation Integration:** Utilizes user's location to find nearby pilots.
-* **Custom Distance Calculation:** Employs a specific formula to determine pilot proximity (**Formula details can be found in the `src/utils/distanceCalculation.js` file**).
+* **Wide Data Range:** This project has over **500** Data Points (Data.js).
 * **Interactive Map:** Visualizes pilot locations on a map using Leaflet.
 * **Search Functionality (Optional):** Allows users to potentially filter or search for pilots based on additional criteria (to be implemented based on your design).
 
