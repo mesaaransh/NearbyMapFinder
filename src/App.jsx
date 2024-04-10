@@ -65,6 +65,10 @@ function App() {
       <div className="container">
         <div className="pannel">
 
+          <center>
+            <h1>Pilot Finder</h1>
+          </center>
+
           <form action="" onSubmit={nearbyFinder} className='cordinateInputForm'>
             <div>
               <input placeholder='Latitude' type="text" name="lat" onChange={(e) => { setLat(e.target.value) }} />
@@ -73,37 +77,50 @@ function App() {
             <button type='submit'>Submit</button>
           </form>
 
-          <div className='resultBox'>
 
-            <div className='left'>
-              <h2>Saaransh Gupta</h2>
-              <p>12.123245, 60.123453</p>
-            </div>      
+          <div className="results">
 
-
-            <div className='right'>
-              5.9 Km
-            </div>
-
-          </div>
-
-          <table border={2} className='resultTable'>
-            <tr>
-              <th>Name</th>
-              <th>Latitude, Longitude</th>
-              <th>Distance</th>
-            </tr>
-
+            <h3>Best Results: </h3>
             {
-              filterData.map((p) => (
-                <tr>
-                  <td> {p.name} </td>
-                  <td> {p.lat}, {p.long} </td>
-                  <td> {p.distance}</td>
-                </tr>
+              filterData.map((p, i) => (
+                i < 3 ?
+                  <div className='resultBox'>
+                    <div className='left'>
+                      <h2>{p.name}</h2>
+                      <p>{p.long}, {p.lat}</p>
+                    </div>
+                    <div className='right'>
+                      {p.distance} Km
+                    </div>
+                  </div>
+                  :
+                  <></>
               ))
             }
-          </table>
+            
+            
+            <h3 style={{marginTop: "20px"}}>Other Results: </h3>
+            <table border={2} className='resultTable'>
+              <tr>
+                <th>Name</th>
+                <th>Latitude, Longitude</th>
+                <th>Distance</th>
+              </tr>
+
+              {
+                filterData.map((p, i) => (
+                  i > 3 ?
+                    <tr>
+                      <td> {p.name} </td>
+                      <td> {p.lat}, {p.long} </td>
+                      <td> {p.distance}</td>
+                    </tr> :
+                    <></>
+                ))
+              }
+            </table>
+
+          </div>
 
         </div>
         <div className="map">
